@@ -1,0 +1,129 @@
+#! /usr/bin/env python3
+
+from sys import argv
+from argparse import ArgumentParser
+from shutil import copy
+from time import time
+from subprocess import run, PIPE
+import os
+
+S = {
+    'installDir': '/usr/local/bin/',
+    'app': 'Ixesha',
+    'dir': {
+        'input': None,
+        'output': None,
+    },
+    'tag': {
+        'progress': 'progress',
+        'current': 'current',
+    },
+}
+
+parser = ArgumentParser(prog='{}'.format(S['app']),
+                        description='{app} - Incremental Snapshot Backup System'.format(app=S['app']))
+
+parser.add_argument('-i', '--install', action='store_true',
+                    help='Install script')
+parser.add_argument('-u', '--uninstall', action='store_true',
+                    help='Uninstall script')
+parser.add_argument('-b', '--from', '--backup', nargs=1, dest='backup',  metavar='<folder-to-be-backed-up>',
+                    help='Directory to be backed up')
+parser.add_argument('-o', '--to', '--output', nargs=1, dest='output', metavar='<backup-location>',
+                    help='Where to save your backup')
+
+
+def install():
+    copy(
+        os.path.abspath(__file__),
+        os.path.abspath(S['installDir']))
+    print('Successfully installed {app} in: {path}'.format(
+        app=S['app'], path=S['installDir']))
+
+
+def uninstall():
+    os.remove(
+        os.path.join(
+            os.path.abspath(S['installDir']),
+            os.path.basename(__file__)
+        )
+    )
+    print('Successfully uninstalled {app} from: {path}'.format(
+        app=S['app'], path=S['installDir']))
+
+
+def backup(i, o):
+
+    # Backup
+    now = time()
+    id = round(now)
+    input = '{input}/'.format(input=i)
+
+    # Define paths and files
+    tmp = '{output}/{id}.{tag}'.format(output=o,
+                                       id=id, tag=S['tag']['progress'])
+    final = '{output}/{id}'.format(output=o, id=id)
+    cur = '{output}/{tag}'.format(output=o, tag=S['tag']['current'])
+
+    # If fist time backing up make fake current dir
+    first = False
+    if not os.path.exists(cur):
+        first = True
+
+    # Starting the actual backup
+    # If no current folder is found, take the current bkp dir as comparison
+    print('Backing up...')
+    cmd = 'rsync -az --delete --link-dest="{cur}" "{input}" "{tmp}"'.format(
+        cur=o if first else cur, input=input, tmp=tmp)
+    ret = run(cmd, shell=True, stdout=PIPE)
+    print('Done. ({}s)'.format(round(time() - now, 1)))
+
+    # Cleaning Up
+    print('Cleaning up...')
+
+    os.rename(tmp, final)
+    if not first:
+        os.remove(cur)
+    os.symlink(final, cur)
+
+
+def error(msg):
+    print('{}\n'.format(msg))
+    parser.print_help()
+
+
+def init():
+    opt = parser.parse_args(argv[1:])
+
+    if opt.install and opt.uninstall:
+        error('Cannot install and uninstall at the same time.')
+        return
+
+    if opt.install:
+        install()
+        return
+
+    if opt.uninstall:
+        uninstall()
+        return
+
+    if opt.backup is None and opt.output is None:
+        error('Need a backup and output directory')
+        return
+
+    input = os.path.abspath(opt.backup[0])
+    output = os.path.abspath(opt.output[0])
+
+    if not os.path.isdir(input):
+        raise NotADirectoryError('{}'.format(input))
+
+    if not os.path.isdir(output):
+        try:
+            os.makedirs(output)
+        except:
+            raise PermissionError('Cannot write to: {}'.format(output))
+
+    backup(input, output)
+
+
+init()
