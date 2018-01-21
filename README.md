@@ -1,10 +1,10 @@
 # Ixesha
 
-Make incremental snapshots to backup any folder to any location/server. 💪
+🗄 Make incremental snapshots to backup any folder to any location/server.
 
-Written in python. 🐍
+🐍 Written in python.
 
-###### Example
+###### Example 💥
 
 ```bash
 python3 ixesha.py --backup ~/ --output /mnt/backup/home
@@ -12,11 +12,11 @@ python3 ixesha.py --backup ~/ --output /mnt/backup/home
 
 ## Setup 
 
-### Requirements 💾
+### Requirements
 - `Python3`
 - `rsync` (min. v3.1.1)
 
-### Installation
+### Installation 🚂
 
 ###### macOS
 
@@ -29,12 +29,12 @@ python3 ixesha.py --backup ~/ --output /mnt/backup/home
 
 ###### windows
 
-Well... I don't know 😅
+Well... I don't know...
 
 
-## Usage 🚀
+## Usage 👾
 
-### Run 👾
+### Run 🚀
 
 ```bash
 python3 ixesha.py --backup <my-folder> --output <where-to-save-it>
@@ -57,7 +57,7 @@ python3 ixesha.py --backup ~/ --output /mnt/backupdrive/home
 - `-o` `--output` Location where the snapshots will be saved
 
 
-### Cron
+### Cron 🕰
 
 If you want to run it every x... you can create a cronjob
 
