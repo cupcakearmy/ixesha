@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 
+__version__ = '1.1'
+
 from sys import argv
 from argparse import ArgumentParser
 from shutil import copy
@@ -34,20 +36,34 @@ parser.add_argument('-o', '--to', '--output', nargs=1, dest='output', metavar='<
 
 
 def install():
-    copy(
-        os.path.abspath(__file__),
-        os.path.abspath(S['installDir']))
+    i = os.path.abspath(__file__)
+    o = os.path.join(
+        os.path.abspath(S['installDir']),
+        os.path.basename(__file__)
+    )
+
+    if os.path.exists(o):
+        print('{app} already installed in: {path}'.format(
+            app=S['app'], path=S['installDir']))
+        return
+
+    copy(i, o)
     print('Successfully installed {app} in: {path}'.format(
         app=S['app'], path=S['installDir']))
 
 
 def uninstall():
-    os.remove(
-        os.path.join(
-            os.path.abspath(S['installDir']),
-            os.path.basename(__file__)
-        )
+    o = os.path.join(
+        os.path.abspath(S['installDir']),
+        os.path.basename(__file__)
     )
+
+    if not os.path.exists(o):
+        print('{app} not installed in: {path}'.format(
+            app=S['app'], path=S['installDir']))
+        return
+
+    os.remove(o)
     print('Successfully uninstalled {app} from: {path}'.format(
         app=S['app'], path=S['installDir']))
 
