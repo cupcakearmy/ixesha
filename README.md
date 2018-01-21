@@ -20,7 +20,7 @@ python3 ixesha.py --backup ~/ --output /mnt/backup/home
 
 ###### macOS
 
-1. Install brew: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+1. Install [brew](https://brew.sh/): `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 2. Install `python3` and `rsync`: `brew install python3 rsync`
 
 ###### debian / ubuntu
@@ -37,10 +37,10 @@ Well... I don't know 😅
 ### Run 👾
 
 ```bash
-python3 ixesha.py [-h|--help] -b|--backup <my-folder> -o|--output <where-to-save-it>
-# or
-./ixesha -b <my-folder> -o <where-to-save-it>
+python3 ixesha.py --backup <my-folder> --output <where-to-save-it>
 ```
+
+or with only bash: ```./ixesha -b <my-folder> -o <where-to-save-it>```
 
 ###### Example
 
