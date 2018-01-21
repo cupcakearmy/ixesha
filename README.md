@@ -4,12 +4,25 @@
 
 🐍 Written in python.
 
-###### Getting started example 💥
+## Quickstart 💥
 
 ```bash
-python3 ixesha --install
+git clone https://github.com/CupCakeArmy/ixesha
+python3 ixesha/ixesha --install
+rm -rf ixesha
+
 ixesha --backup ~/ --output /mnt/backup/home
 ```
+
+Whenever you want to do an incremental backup simply rerun the same command:
+
+```bash
+ixesha --backup ~/ --output /mnt/backup/home
+```
+
+###### How does it work? 🧐
+
+All the snapshots are timestamped and you can delete all the old ones if you like (yes, really 💪), keeping only the last one. The backups are incremental, so they only save the changes you made and are therefore very space efficient. The latest backup is always the `./current` link to the last backup inside of the backup directory.
 
 ## Setup
 
