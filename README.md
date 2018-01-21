@@ -31,16 +31,16 @@ All the snapshots are timestamped and you can delete all the old ones if you lik
 - `Python3`
 - `rsync` (min. v3.1.1)
 
-###### macOS
+##### macOS
 
-1. Get [Brew](https://brew.sh/): `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+1. Install [Brew](https://brew.sh/) if not already
 2. Run: `brew install python3 rsync`
 
-###### debian / ubuntu
+##### debian / ubuntu
 
-1. `apt install -y python3 rsync`
+Run: `apt install -y python3 rsync`
 
-###### windows
+##### windows
 
 Well... I don't know...
 
