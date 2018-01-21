@@ -13,6 +13,7 @@ python3 ixesha.py --backup ~/ --output /mnt/backup/home
 ## Setup 
 
 ### Requirements
+
 - `Python3`
 - `rsync` (min. v3.1.1)
 
@@ -31,7 +32,6 @@ python3 ixesha.py --backup ~/ --output /mnt/backup/home
 
 Well... I don't know...
 
-
 ## Usage 👾
 
 ### Run 🚀
@@ -45,17 +45,16 @@ or with only bash: ```./ixesha -b <my-folder> -o <where-to-save-it>```
 ###### Example
 
 Backup my home folder for example to some mounted drive
+
 ```bash
 python3 ixesha.py --backup ~/ --output /mnt/backupdrive/home
 ```
-
 
 ### Arguments
 
 - `-h` `--help` Show help dialog
 - `-b` `--backup` The folder to be backed up
 - `-o` `--output` Location where the snapshots will be saved
-
 
 ### Cron 🕰
 
