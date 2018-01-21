@@ -11,6 +11,7 @@ import os
 
 S = {
     'installDir': '/usr/local/bin/',
+    'git': 'https://github.com/CupCakeArmy/ixesha',
     'app': 'Ixesha',
     'dir': {
         'input': None,
@@ -22,7 +23,7 @@ S = {
     },
 }
 
-parser = ArgumentParser(prog='{}'.format(S['app']),
+parser = ArgumentParser(prog='{}'.format(S['app']), epilog=S['git'],
                         description='{app} - Incremental Snapshot Backup System'.format(app=S['app']))
 
 parser.add_argument('-i', '--install', action='store_true',
