@@ -24,7 +24,7 @@ ixesha --backup ~/ --output /mnt/backup/home
 
 All the snapshots are timestamped and you can delete all the old ones if you like (yes, really 💪), keeping only the last one. The backups are incremental, so they only save the changes you made and are therefore very space efficient. The latest backup is always the `./current` link to the last backup inside of the backup directory.
 
-## Setup
+## Setup 🏗
 
 ### Requirements
 
